@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-padding-top: 2rem;
+        scroll-behavior: smooth;
+        list-style: none;
+        text-decoration: none;
+        font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+  <nav class="bg-white shadow">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-4">
+        <a href="#" class="logo">
+            <img src="img/logo.png" alt="Logo" class="w-24">
+          </a>
+      </div>
+      <div class="flex items-center space-x-4">
+        <input type="text" placeholder="Search for cars..." class="border rounded-lg px-4 py-2 text-sm focus:outline-blue-500" >
+        <a href="mybookings.html" class="flex items-center text-blue-600 hover:text-white border border-blue-600 px-4 py-2 rounded-lg hover:bg-blue-600">
+            <i class='bx bx-calendar-check'></i>
+            <span class="ml-2">My Bookings</span>
+          </a>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"><a href="index.html">Log Out</a></button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-6 py-8">
+    <h1 class="text-2xl font-semibold mb-6">All Cars</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-white shadow rounded-lg p-4">
+        <img src="img/car1.png" alt="BMW" class="rounded-t-lg w-full h-48 object-cover">
+        <div class="mt-4">
+          <h2 class="text-lg font-semibold">Toyota Camry</h2>
+          <p class="text-gray-500">Luxury Sedan</p>
+          <p ><span class="text-blue-500 text-xl font-bold">$358</span>/day</p>
+          <div class="mt-2 flex justify-between items-center">
+            <span class="text-green-500 text-sm font-semibold">Available</span>
+
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600"><a href="viewDetail.html">View Details</a></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white shadow rounded-lg p-4">
+        <img src="img/car2.png" alt="Mercedes" class="rounded-t-lg w-full h-48 object-cover">
+        <div class="mt-4">
+          <h2 class="text-lg font-semibold">Hyundai Tucson</h2>
+          <p class="text-gray-500">Luxury SUV</p>
+          <p ><span class="text-blue-500 text-xl font-bold">$408</span>/day</p>
+          <div class="mt-2 flex justify-between items-center">
+            <span class="text-red-500 text-sm font-semibold">Rented</span>
+            <button class="bg-gray-300 text-gray-600 px-4 py-2 rounded-lg text-sm cursor-not-allowed">View Details</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white shadow rounded-lg p-4">
+        <img src="img/car3.jpg" alt="Porsche" class="rounded-t-lg w-full h-48 object-cover">
+        <div class="mt-4">
+          <h2 class="text-lg font-semibold">Porsche 911</h2>
+          <p class="text-gray-500">Sports Car</p>
+          <p ><span class="text-blue-500 text-xl font-bold">$249</span>/day</p>
+          <div class="mt-2 flex justify-between items-center">
+            <span class="text-green-500 text-sm font-semibold">Available</span>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600"><a href="viewDetail.html">View Details</a></button>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white shadow rounded-lg p-4">
+        <img src="img/car4.png" alt="Porsche" class="rounded-t-lg w-full h-48 object-cover">
+        <div class="mt-4">
+          <h2 class="text-lg font-semibold">Lexus GX550</h2>
+          <p class="text-gray-500">Luxury SUV</p>
+          <p ><span class="text-blue-500 text-xl font-bold">$759</span>/day</p>
+          <div class="mt-2 flex justify-between items-center">
+            <span class="text-green-500 text-sm font-semibold">Available</span>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600"><a href="viewDetail.html">View Details</a></button>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white shadow rounded-lg p-4">
+        <img src="img/car5.png" alt="Porsche" class="rounded-t-lg w-full h-48 object-cover">
+        <div class="mt-4">
+          <h2 class="text-lg font-semibold">Lamborghini Urus</h2>
+          <p class="text-gray-500">Luxury Sedan</p>
+          <p ><span class="text-blue-500 text-xl font-bold">$436</span>/day</p>
+          <div class="mt-2 flex justify-between items-center">
+            <span class="text-green-500 text-sm font-semibold">Available</span>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600"><a href="viewDetail.html">View Details</a></button>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white shadow rounded-lg p-4">
+        <img src="img/car3.png" alt="Porsche" class="rounded-t-lg w-full h-48 object-cover">
+        <div class="mt-4">
+          <h2 class="text-lg font-semibold">Mercedes Benz</h2>
+          <p class="text-gray-500">Luxury Sedan</p>
+          <p ><span class="text-blue-500 text-xl font-bold">$658</span>/day</p>
+          <div class="mt-2 flex justify-between items-center">
+            <span class="text-red-500 text-sm font-semibold">Rented</span>
+            <button class="bg-gray-300 text-gray-600 px-4 py-2 rounded-lg text-sm cursor-not-allowed">View Details</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <footer class="bg-blue-900 text-white py-8">
+    <div class="container mx-auto px-4 flex flex-wrap justify-between items-start gap-8">
+        <div class="flex-1 min-w-[250px]">
+            <img src="img/logo.png" alt="Logo" class="mb-4 w-32">
+            <p class="text-md leading-6">
+                Your trusted partner for reliable car rentals, offering a wide range of vehicles to suit your needs.
+            </p>
+        </div>
+        <div class="flex-1 min-w-[200px]">
+            <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2 text-md">
+                <li><a href="#home" class="hover:underline">Home</a></li>
+                <li><a href="#ride" class="hover:underline">Ride</a></li>
+                <li><a href="#services" class="hover:underline">Services</a></li>
+                <li><a href="#about" class="hover:underline">About</a></li>
+                <li><a href="#reviews" class="hover:underline">Reviews</a></li>
+            </ul>
+        </div>
+
+        <div class="flex-1 min-w-[200px]">
+            <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
+            <p class="text-md">📍 123 Main Street, City, Country</p>
+            <p class="text-md">📞 +251 973820194</p>
+            <p class="text-md">✉️ support@carrent.com</p>
+        </div>
+        <div class="flex-1 min-w-[200px]">
+            <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+            <div class="flex space-x-4">
+                <a href="#" class="text-white text-xl hover:text-gray-300"><i class='bx bxl-facebook'></i></a>
+                <a href="#" class="text-white text-xl hover:text-gray-300"><i class='bx bxl-twitter'></i></a>
+                <a href="#" class="text-white text-xl hover:text-gray-300"><i class='bx bxl-instagram'></i></a>
+                <a href="#" class="text-white text-xl hover:text-gray-300"><i class='bx bxl-linkedin'></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="border-t border-indigo-500 mt-8 pt-4 text-center">
+        <p class="text-sm">© 2025 CarRentals. All Rights Reserved.</p>
+    </div>
+    </footer>
+</body>
+</html>

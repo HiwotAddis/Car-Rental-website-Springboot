@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Car Rental Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="overflow-x-hidden font-poppins">
+  <header class="fixed top-0 right-0 w-full bg-gray-50 z-50 flex justify-between items-center px-10 py-4 shadow">
+   
+    <a href="#" class="logo">
+      <img src="img/logo.png" alt="Logo" class="w-24">
+    </a>
+
+    <div class="block lg:hidden text-2xl cursor-pointer" id="menu-icon">
+      <i class="bx bx-menu"></i>
+    </div>
+    <ul class="hidden lg:flex space-x-6 navbar">
+      <li><a href="#home" class="text-gray-700 font-medium hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500">Home</a></li>
+      <li><a href="#ride" class="text-gray-700 font-medium hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500">Ride</a></li>
+      <li><a href="#services" class="text-gray-700 font-medium hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500">Services</a></li>
+      <li><a href="#about" class="text-gray-700 font-medium hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500">About</a></li>
+      <li><a href="#reviews" class="text-gray-700 font-medium hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500">Reviews</a></li>
+    </ul>
+
+    <div class="flex items-center space-x-4">
+      
+      <a href="login.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+        Sign In
+      </a>
+    </div>
+  </header>
+
+    <!--Home-->
+    <section class="home" id="home">
+        <div class="text">
+            <h1><span>Looking</span> to <br>rent a car</h1>
+            <p>Whether you're planning a weekend getaway, a business trip, or <br> need a reliable ride for daily errands, we’ve got you covered. <br>Start your journey with confidence and enjoy the freedom <br> of the open road with our hassle-free car rental solutions!</p>
+            <div class="app-stores">
+                <img src="img/ios.png" alt="">
+                <img src="img/play.png" alt="">
+            </div>
+        </div>
+
+        <div class="form-container">
+            <form action="">
+                <div class="input-box">
+                    <span>Location</span>
+                    <input type="search" name="" id="" placeholder="Search Places">
+                </div>
+                <div class="input-box">
+                    <span>Pick-Up Date</span>
+                    <input type="date" name="" id="">
+                </div>
+                <div class="input-box">
+                    <span>Return Date</span>
+                    <input type="date" name="" id="">
+                </div>
+                <input type="submit" name="" id="" class="btn">
+            </form>
+        </div>
+    </section>
+    <!--Ride-->
+    <section class="ride" id="ride">
+        <div class="heading">
+            <span>How Its Work</span>
+            <h1>Rent With 3 Easy Steps</h1>
+        </div>
+        <div class="ride-container">
+            <div class="box">
+                <i class='bx bxs-map'></i>
+                <h2>Choose A Location</h2>
+                <p>Select the location where you'd like to pick up your car. We offer convenient pick-up points in multiple cities to make your experience seamless.</p>
+            </div>
+            <div class="box">
+                <i class='bx bxs-calendar-check'></i>
+                <h2>Pick-Up Date</h2>
+                <p>Set your desired pick-up and drop-off dates. Whether it's a short trip or a long-term rental, we’ll match your schedule.</p>
+            </div>
+            <div class="box">
+                <i class='bx bxs-calendar-star' ></i>
+                <h2>Book A Car</h2>
+                <p>Browse our selection of vehicles and choose the one that fits your needs. Complete the booking process in just a few clicks and get ready to drive!</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="heading">
+            <span>Best Services</span>
+            <h1>Explore Out Top Deals <br> From Top Rated Dealers</h1>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+           
+            <div class="bg-white shadow rounded-lg p-4">
+              <img src="img/car1.png" alt="BMW" class="rounded-t-lg w-full h-48 object-cover">
+              <div class="mt-4">
+                <h2 class="text-lg font-semibold">Toyota Camry</h2>
+                <p class="text-gray-500">Luxury Sedan</p>
+                <p ><span class="text-blue-500 text-xl font-bold">$358</span>/day</p>
+                <div class="mt-2 flex justify-between items-center">
+                  <span class="text-green-500 text-sm font-semibold">Available</span>
+      
+                  <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600"><a href="viewDetail.html">View Details</a></button>
+                </div>
+              </div>
+            </div>
+      
+            <div class="bg-white shadow rounded-lg p-4">
+              <img src="img/car2.png" alt="Mercedes" class="rounded-t-lg w-full h-48 object-cover">
+              <div class="mt-4">
+                <h2 class="text-lg font-semibold">Hyundai Tucson</h2>
+                <p class="text-gray-500">Luxury SUV</p>
+                <p ><span class="text-blue-500 text-xl font-bold">$408</span>/day</p>
+                <div class="mt-2 flex justify-between items-center">
+                  <span class="text-red-500 text-sm font-semibold">Rented</span>
+                  <button class="bg-gray-300 text-gray-600 px-4 py-2 rounded-lg text-sm cursor-not-allowed">View Details</button>
+                </div>
+              </div>
+            </div>
+      
+            <div class="bg-white shadow rounded-lg p-4">
+              <img src="img/car3.jpg" alt="Porsche" class="rounded-t-lg w-full h-48 object-cover">
+              <div class="mt-4">
+                <h2 class="text-lg font-semibold">Porsche 911</h2>
+                <p class="text-gray-500">Sports Car</p>
+                <p ><span class="text-blue-500 text-xl font-bold">$249</span>/day</p>
+                <div class="mt-2 flex justify-between items-center">
+                  <span class="text-green-500 text-sm font-semibold">Available</span>
+                  <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600"><a href="viewDetail.html">View Details</a></button>
+                </div>
+              </div>
+            </div>
+            
+            
+            
+        </div>
+    </section>
+    <!--About-->
+    <section class="about" id="about">
+        <div class="heading">
+            <span>About Us</span>
+            <h1>Best Customer Experience</h1>
+        </div>
+        <div class="about-container">
+            <div class="about-img">
+                <img src="img/about.jpg" class="h-auto" alt="">
+            </div>
+            <div class="about-text">
+                <span>About Us</span>
+                <p>At CAR RENT, we are dedicated to providing top-notch car rental services tailored to <br>your needs. Our mission is to make transportation hassle-free, reliable, and affordable for everyone.</p>
+                <p>With a wide selection of vehicles and locations, we ensure a seamless experience from booking to <br>drop-off. Whether you're planning a road trip, need a car for business, or just looking for <br> convenience, we’ve got you covered.</p>
+                <p>Our team is passionate about delivering exceptional customer service and ensuring you drive away <br> with satisfaction.</p>
+                <a href="#" class="btn">Learn More</a>
+            </div>
+        </div>
+    </section>
+    <!--Reviews-->
+    <section class="reviews" id="reviews">
+        <div class="heading">
+            <span>Reviews </span>
+            <h1>Whats Our Customer Say</h1>
+        </div>
+        <div class="reviews-container">
+            <div class="box">
+                <div class="rev-img">
+                    <img src="img/rev1.png" alt="">
+                </div>
+                <h2>Aida Solomon</h2>
+                <div class="stars">
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star-half"></i>
+                </div>
+                <p>"I had an incredible experience renting a car through this platform. The process was seamless, the staff was friendly, and the car was in excellent condition. I’ll definitely be back for my next trip!"</p>
+            </div>
+            <div class="box">
+                <div class="rev-img">
+                    <img src="img/rev2.png" alt="">
+                </div>
+                <h2>Eskender Addisu</h2>
+                <div class="stars">
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star-half"></i>
+                </div>
+                <p>"Exceptional service and great value! The booking process was straightforward, and I appreciated the variety of cars available. Highly recommended for anyone looking for a reliable car rental service."</p>
+            </div>
+            <div class="box">
+                <div class="rev-img">
+                    <img src="img/rev3.png" alt="">
+                </div>
+                <h2>Abel Aklilu</h2>
+                <div class="stars">
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star"></i>
+                    <i class="bx bxs-star-half"></i>
+                </div>
+                <p>"Fantastic customer support and well-maintained vehicles. I was impressed with the attention to detail and the ease of pick-up and drop-off. This is my go-to car rental company from now on."</p>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-8">
+        <div class="container mx-auto px-4 flex flex-wrap justify-between items-start gap-8">
+            <div class="flex-1 min-w-[250px]">
+                <img src="img/logo.png" alt="Logo" class="mb-4 w-32">
+                <p class="text-md leading-6">
+                    Your trusted partner for reliable car rentals, offering a wide range of vehicles to suit your needs.
+                </p>
+            </div>
+            <div class="flex-1 min-w-[200px]">
+                <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-md">
+                    <li><a href="#home" class="hover:underline">Home</a></li>
+                    <li><a href="#ride" class="hover:underline">Ride</a></li>
+                    <li><a href="#services" class="hover:underline">Services</a></li>
+                    <li><a href="#about" class="hover:underline">About</a></li>
+                    <li><a href="#reviews" class="hover:underline">Reviews</a></li>
+                </ul>
+            </div>
+
+            <div class="flex-1 min-w-[200px]">
+                <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
+                <p class="text-md">📍 123 Main Street, City, Country</p>
+                <p class="text-md">📞 +251 973820194</p>
+                <p class="text-md">✉️ support@carrent.com</p>
+            </div>
+            <div class="flex-1 min-w-[200px]">
+                <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-white text-xl hover:text-gray-300"><i class='bx bxl-facebook'></i></a>
+                    <a href="#" class="text-white text-xl hover:text-gray-300"><i class='bx bxl-twitter'></i></a>
+                    <a href="#" class="text-white text-xl hover:text-gray-300"><i class='bx bxl-instagram'></i></a>
+                    <a href="#" class="text-white text-xl hover:text-gray-300"><i class='bx bxl-linkedin'></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-indigo-500 mt-8 pt-4 text-center">
+            <p class="text-sm">© 2025 CarRentals. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <script >
+        let menu=document.querySelector('#menu-icon');
+        let navbar=document.querySelector('.navbar');
+        menu.onclick=()=>{
+        menu.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+        }
+
+        window.onscroll=()=>{
+        menu.classList.remove('bx-x');
+        navbar.classList.remove('active');
+        }
+        const sr=ScrollReveal({
+            distance:'60px',
+            duration:2500,
+            delay:200,
+            reset:true
+        })
+        sr.reveal('.text',{delay:50, origin:'top'})
+        sr.reveal('.form-container form',{delay:350 , origin:'left'})
+        sr.reveal('.heading',{delay:350, origin:'top'})
+        sr.reveal('.ride-container .box',{delay:250, origin:'top'})
+        sr.reveal('.services-container .box',{delay:250, origin:'top'})
+        sr.reveal('.about-container .box',{delay:250, origin:'top'})
+        sr.reveal('.reviews-container .box',{delay:250, origin:'top'})
+        const navbarLinks = document.querySelectorAll('.navbar a');
+        const updateActiveLink = () => {
+            const sections = document.querySelectorAll('section'); 
+            let currentSectionId = ""; 
+
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+
+                
+                if (window.scrollY >= sectionTop - sectionHeight / 3) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+
+            
+            navbarLinks.forEach((link) => {
+                link.classList.remove('text-blue-500', 'border-blue-500');
+                if (link.getAttribute('href').substring(1) === currentSectionId) {
+                    link.classList.add('text-blue-500', 'border-blue-500');
+                }
+        });
+        };
+        window.addEventListener('scroll', updateActiveLink);
+    </script>
+</body>
+</html>
