@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Rental</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    #carList{
+         min-height: 300px;
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+<header class="bg-white shadow-md">
+  <div class="container mx-auto p-4 flex justify-between items-center">
+    <!-- Logo -->
+    <a href="index.html">
+      <img src="img/logo1.png" alt="Car Rental Logo" class="h-14 w-46">
+    </a>
+    
+    <!-- Navigation -->
+    <nav>
+      <ul class="flex gap-5 items-center">
+        <li><a href="index.html" class="text-gray-700 hover:text-blue-500">Home</a></li>
+        <li><a href="listcars.html" class="text-gray-700 hover:text-blue-500">Cars</a></li>
+        <li><a href="mybookings.html" class="text-gray-700 hover:text-blue-500">Bookings</a></li>
+        <li>
+          <button onclick="logout()" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">
+            Logout
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+  <main class="container mx-auto p-4">
+  
+  <div class="bg-white p-4 rounded-lg shadow-md mb-6 flex gap-4 flex-wrap">
+    <input id="searchMake" type="text" placeholder="Search by Make" class="border p-2 rounded w-full md:w-auto">
+    <input id="searchModel" type="text" placeholder="Search by Model" class="border p-2 rounded w-full md:w-auto">
+    <input id="searchPrice" type="number" placeholder="Max Price Per Day" class="border p-2 rounded w-full md:w-auto">
+    <button onclick="searchCars()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+      Search
+    </button>
+    
+  </div>
+  
+    <h2 class="text-xl font-bold mb-4">Cars</h2>
+    <div id="carList" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6">
+      <!-- Cars will be dynamically loaded here -->
+    </div>
+  </main>
+  
+    <footer class="bg-blue-900 text-white py-8 mt-12">
+    <div class="container mx-auto px-4 flex flex-wrap justify-between items-start gap-8">
+        <div class="flex-1 min-w-[250px]">
+            <img src="img/logo1.png" alt="Logo" class="mb-4 w-32">
+            <p class="text-md leading-6">
+                Your trusted partner for reliable car rentals, offering a wide range of vehicles to suit your needs.
+            </p>
+        </div>
+        <div class="flex-1 min-w-[200px]">
+            <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2 text-md">
+                <li><a href="index.html" class="hover:underline">Home</a></li>
+                <li><a href="listcars.html" class="hover:underline">Ride</a></li>
+                <li><a href="mybookings.html" class="hover:underline">Services</a></li>
+            </ul>
+        </div>
+
+        <div class="flex-1 min-w-[200px]">
+            <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
+            <p class="text-md">📍 123 Main Street, City, Country</p>
+            <p class="text-md">📞 +251 973820194</p>
+            <p class="text-md">✉️ support@carrent.com</p>
+        </div>
+        <div class="flex-1 min-w-[200px]">
+            <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+            <div class="flex space-x-4">
+                <a href="#" class="text-white text-xl hover:text-gray-300"><i class='bx bxl-facebook'></i></a>
+                <a href="#" class="text-white text-xl hover:text-gray-300"><i class='bx bxl-twitter'></i></a>
+                <a href="#" class="text-white text-xl hover:text-gray-300"><i class='bx bxl-instagram'></i></a>
+                <a href="#" class="text-white text-xl hover:text-gray-300"><i class='bx bxl-linkedin'></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="border-t border-indigo-500 mt-8 pt-4 text-center">
+        <p class="text-sm">© 2025 CarRentals. All Rights Reserved.</p>
+    </div>
+    </footer>
+    
+
+  <script>
+    const carListElement = document.getElementById('carList');
+
+    async function fetchCars() {
+      try {
+        const response = await fetch('http://localhost:9090/cars');
+        const cars = await response.json();
+        displayCars(cars);
+      } catch (error) {
+        console.error('Error fetching cars:', error);
+      }
+    }
+    
+ // Search function that automatically fetches all cars when inputs are empty
+    async function searchCars() {
+        const make = document.getElementById('searchMake').value.trim();
+        const model = document.getElementById('searchModel').value.trim();
+        const pricePerDay = document.getElementById('searchPrice').value.trim();
+
+        if (!make && !model && !pricePerDay) {
+            fetchCars(); // If search fields are empty, reset to full list
+            return;
+        }
+
+        let query = `http://localhost:9090/cars/search?`;
+        if (make) query += `make=${encodeURIComponent(make)}&`;
+        if (model) query += `model=${encodeURIComponent(model)}&`;
+        if (pricePerDay) query += `pricePerDay=${encodeURIComponent(pricePerDay)}`;
+
+        try {
+            const response = await fetch(query);
+            const cars = await response.json();
+            displayCars(cars);
+        } catch (error) {
+            console.error('Error searching cars:', error);
+        }
+    }
+
+    // Attach event listeners to search inputs to reset results when cleared
+    document.getElementById('searchMake').addEventListener('input', searchCars);
+    document.getElementById('searchModel').addEventListener('input', searchCars);
+    document.getElementById('searchPrice').addEventListener('input', searchCars);
+
+
+    
+
+    function displayCars(cars) {
+    	
+    	if (cars.length === 0) {
+            carListElement.innerHTML = `
+                <div class="col-span-full text-center text-gray-600 text-lg font-semibold">
+                    No cars found.
+                </div>
+            `;
+            return;
+        }
+    	
+      carListElement.innerHTML = cars.map(car => `
+        <div class="bg-white rounded-lg shadow-md p-4">
+          <img src="${car.imagePath || 'https://via.placeholder.com/300'}" alt="${car.make}" class="rounded w-full h-48 object-cover">
+          <h3 class="text-lg font-bold mt-2">${car.make} ${car.model}</h3>
+          <p class="text-gray-600">${car.year}</p>
+          <p class="font-semibold text-lg text-blue-500 mt-1">$${car.pricePerDay}/day</p>
+          
+         <div class="mt-1 flex justify-between items-center">
+          <span class="px-2 py-1 rounded-full text-sm ${car.availabilityStatus === 'Available' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+            ${car.availabilityStatus}
+          </span>
+          <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" onclick="viewDetails(${car.id})">
+            View Details
+          </button>
+        </div>
+        </div>
+      `).join('');
+    }
+
+    function viewDetails(carId) {
+      window.location.href = `detail.html?id=${carId}`;
+    }
+
+    fetchCars();
+  </script>
+  
+  <script>
+  function logout() {
+    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
+    window.location.href = "login.html";
+  }
+</script>
+
+</body>
+</html>

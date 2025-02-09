@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Details</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body class="overflow-x-hidden font-sans bg-gray-100">
+  <!-- Header -->
+<header class="bg-white shadow-md">
+  <div class="container mx-auto p-4 flex justify-between items-center">
+    <!-- Logo -->
+    <a href="index.html">
+      <img src="img/logo1.png" alt="Car Rental Logo" class="h-14 w-46">
+    </a>
+    
+    <!-- Navigation -->
+    <nav>
+      <ul class="flex gap-5 items-center">
+        <li><a href="index.html" class="text-gray-700 hover:text-blue-500">Home</a></li>
+        <li><a href="listcars.html" class="text-gray-700 hover:text-blue-500">Cars</a></li>
+        <li><a href="mybookings.html" class="text-gray-700 hover:text-blue-500">Bookings</a></li>
+        <li>
+          <button onclick="logout()" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">
+            Logout
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+  <!-- Main Content -->
+  <div class="container mx-auto mt-20 px-4">
+    <a href="listcars.html" class="flex items-center text-gray-600 hover:text-blue-500 mb-6">
+      <i class="bx bx-arrow-back mr-2"></i> Back to Cars
+    </a>
+
+    <div id="car-details" class="p-6 shadow rounded-lg bg-white mb-20">
+      <!-- Car details and booking form will be dynamically populated here -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-8">
+    <div class="container mx-auto px-4 flex flex-wrap justify-between items-start gap-8">
+        <div class="flex-1 min-w-[250px]">
+            <img src="img/logo1.png" alt="Logo" class="mb-4 w-32">
+            <p class="text-md leading-6">
+                Your trusted partner for reliable car rentals, offering a wide range of vehicles to suit your needs.
+            </p>
+        </div>
+        <div class="flex-1 min-w-[200px]">
+            <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2 text-md">
+                <li><a href="index.html" class="hover:underline">Home</a></li>
+                <li><a href="listcars.html" class="hover:underline">Ride</a></li>
+                <li><a href="mybookings.html" class="hover:underline">Services</a></li>
+            </ul>
+        </div>
+
+        <div class="flex-1 min-w-[200px]">
+            <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
+            <p class="text-md">📍 123 Main Street, City, Country</p>
+            <p class="text-md">📞 +251 973820194</p>
+            <p class="text-md">✉️ support@carrent.com</p>
+        </div>
+        <div class="flex-1 min-w-[200px]">
+            <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+            <div class="flex space-x-4">
+                <a href="#" class="text-white text-xl hover:text-gray-300"><i class='bx bxl-facebook'></i></a>
+                <a href="#" class="text-white text-xl hover:text-gray-300"><i class='bx bxl-twitter'></i></a>
+                <a href="#" class="text-white text-xl hover:text-gray-300"><i class='bx bxl-instagram'></i></a>
+                <a href="#" class="text-white text-xl hover:text-gray-300"><i class='bx bxl-linkedin'></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="border-t border-indigo-500 mt-8 pt-4 text-center">
+        <p class="text-sm">© 2025 CarRentals. All Rights Reserved.</p>
+    </div>
+    </footer>
+    
+
+  <script>
+    const carId = new URLSearchParams(window.location.search).get('id');
+    const userId = localStorage.getItem('userId'); // Get userId from local storage
+
+    // Fetch and render car details
+    async function fetchCarDetails() {
+      try {
+        const response = await fetch(`http://localhost:9090/cars/detail?id=${carId}`);
+        if (!response.ok) throw new Error('Failed to fetch car details');
+
+        const car = await response.json();
+        window.currentCar = car; 
+
+        // Populate the car details section
+        document.getElementById('car-details').innerHTML = `
+        	  <div class="grid md:grid-cols-2 gap-8">
+        	    <div class="aspect-w-1 aspect-h-1 w-full h-full max-w-[500px] mx-auto">
+        	      <img src="${car.imagePath || 'https://via.placeholder.com/500'}" alt="${car.make} ${car.model}" class="rounded-lg shadow-lg object-cover w-full h-full">
+        	      <div class="flex space-x-4 mt-12">
+        	        <a href="#" class="text-gray-600 hover:text-blue-500"><i class="bx bxl-facebook-circle text-2xl"></i></a>
+        	        <a href="#" class="text-gray-600 hover:text-blue-500"><i class="bx bxl-twitter text-2xl"></i></a>
+        	        <a href="#" class="text-gray-600 hover:text-blue-500"><i class="bx bxl-pinterest text-2xl"></i></a>
+        	        <a href="#" class="text-gray-600 hover:text-blue-500"><i class="bx bx-link text-2xl"></i></a>
+        	      </div>
+        	    </div>
+        	    <div>
+        	      <div class="shadow-lg p-6 bg-white rounded-lg space-y-4">
+        	        <div class="flex items-center justify-between">
+        	          <h1 class="text-2xl font-semibold">${car.make}</h1>
+        	          <span class="text-sm px-3 py-1 rounded-full ${
+        	            car.availabilityStatus === 'Available'
+        	              ? 'bg-green-100 text-green-600'
+        	              : 'bg-red-100 text-red-600'
+        	          }">${car.availabilityStatus}</span>
+        	        </div>
+        	        <p class="text-sm text-gray-600"> ${car.model}</p>
+        	        <div class="flex items-center space-x-2 mt-2">
+        	          <span class="text-sm font-medium text-gray-500">Year of Production:</span>
+        	          <span class="text-sm font-medium">${car.year}</span>
+        	        </div>
+        	        <div class="flex items-center space-x-2 mt-2">
+        	          <span class="text-sm font-medium text-gray-500">Price per Day:</span>
+        	          <span class="text-lg font-medium text-blue-500">$${car.pricePerDay}/day</span>
+        	        </div>
+        	      </div>
+
+        	      <div class="mt-8 bg-gray-100 p-4 rounded-lg shadow-lg">
+        	        <h3 class="text-lg font-semibold mb-4">Book This Car</h3>
+        	        <form id="booking-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        	          <div>
+        	            <label for="start-date" class="block text-sm font-medium text-gray-600">Start Date</label>
+        	            <input type="date" id="start-date" class="mt-1 w-full px-3 py-2 border rounded-md" ${
+        	              car.availabilityStatus === 'Unavailable' ? 'disabled' : ''
+        	            } required>
+        	          </div>
+        	          <div>
+        	            <label for="end-date" class="block text-sm font-medium text-gray-600">End Date</label>
+        	            <input type="date" id="end-date" class="mt-1 w-full px-3 py-2 border rounded-md" ${
+        	              car.availabilityStatus === 'Unavailable' ? 'disabled' : ''
+        	            } required>
+        	          </div>
+        	          <div class="col-span-full">
+        	            <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-md shadow-lg ${
+        	              car.availabilityStatus === 'Unavailable' ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'
+        	            }" ${car.availabilityStatus === 'Unavailable' ? 'disabled' : ''}>
+        	              Book Now
+        	            </button>
+        	          </div>
+        	        </form>
+        	      </div>
+        	    </div>
+        	  </div>
+        	`;
+
+      } catch (error) {
+        console.error('Error fetching car details:', error);
+      }
+    }
+
+    // Handle booking
+    document.getElementById('car-details').addEventListener('submit', async (e) => {
+      if (e.target.id !== 'booking-form') return;
+
+      e.preventDefault();
+
+      const startDate = document.getElementById('start-date').value;
+      const endDate = document.getElementById('end-date').value;
+      
+      if (!window.currentCar) {
+    	    alert('Car details are not available. Please try again.');
+    	    return;
+    	  }
+      const days = (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24) + 1;
+
+      const totalPrice = days * window.currentCar.pricePerDay;
+      console.log("totalPrice");
+      const bookingData = { carId: parseInt(carId), userId: parseInt(userId), startDate, endDate, totalPrice };
+
+      try {
+        const response = await fetch('http://localhost:9090/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(bookingData),
+        });
+        if (response.ok) {
+          alert('Booking successful!');
+        } else {
+          alert('Booking failed. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error submitting booking:', error);
+      }
+    });
+
+    // Initialize page
+    fetchCarDetails();
+  </script>
+</body>
+</html>

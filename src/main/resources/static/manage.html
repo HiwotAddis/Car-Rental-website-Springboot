@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Cars</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+      * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-padding-top: 2rem;
+      scroll-behavior: smooth;
+      list-style: none;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+    }
+    </style>
+</head>
+<body class="overflow-x-hidden bg-gray-100 font-sans">
+
+<header class="bg-white shadow-sm">
+  <nav class="container mx-auto flex justify-between items-center py-4 px-6">
+    <img src="img/logo1.png" alt="Logo" class="h-14 w-46">
+    <div class="space-x-6">
+      <a href="addcar.html" class="text-gray-600 font-medium hover:text-blue-600">Add Car</a>
+      <a href="manage.html" class="text-blue-500 font-medium  border-b-2 border-blue-600">Manage Car</a>
+      <a href="booking.html" class="text-gray-500 font-medium hover:text-blue-600">Bookings</a>
+    </div>
+    <button onclick="logout()" class="text-red-500 font-medium hover:underline">Logout</button>
+  </nav>
+</header>
+    <div class="container mx-auto py-8">
+        <!-- <div class="flex justify-between items-center mb-4">
+            <div>
+                <button class="text-blue-600 font-medium">+ Add Cars</button>
+                <button class="text-blue-600 font-medium bg-blue-100 px-3 py-2 rounded">Manage Cars</button>
+                <button class="text-blue-600 font-medium">Bookings</button>
+            </div>
+            <button class="text-gray-600">Logout</button>
+        </div> -->
+
+        <h1 class="text-lg font-medium mb-4">Manage Cars</h1>
+
+        <table class="table-auto w-full bg-white shadow rounded-lg">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="px-4 py-2">ID</th>
+                    <th class="px-4 py-2">Car</th>
+                    <th class="px-4 py-2">Make</th>
+                    <th class="px-4 py-2">Model</th>
+                    <th class="px-4 py-2">Availability</th>
+                    <th class="px-4 py-2">Year</th>
+                    <th class="px-4 py-2">Price/Day</th>
+                    <th class="px-4 py-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="car-table">
+                <!-- Cars will be dynamically populated here -->
+            </tbody>
+        </table>
+
+        <!-- <div class="flex justify-center mt-4">
+            <button class="px-3 py-1 bg-gray-200 rounded">1</button>
+            <button class="px-3 py-1 bg-blue-600 text-white rounded">2</button>
+            <button class="px-3 py-1 bg-gray-200 rounded">3</button>
+        </div> -->
+    </div>
+
+    <!-- Edit Popup -->
+    <div id="edit-popup" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
+            <h2 class="text-lg font-medium mb-4">Edit Car</h2>
+            <form id="edit-form">
+                <div class="mb-4">
+                    <label class="block text-gray-700">Make</label>
+                    <input type="text" id="edit-make" class="border rounded w-full px-3 py-2">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Model</label>
+                    <input type="text" id="edit-model" class="border rounded w-full px-3 py-2">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Year</label>
+                    <input type="number" id="edit-year" class="border rounded w-full px-3 py-2">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Price/Day</label>
+                    <input type="number" id="edit-price" class="border rounded w-full px-3 py-2">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Image URL</label>
+                    <input type="text" id="edit-image-url" class="border rounded w-full px-3 py-2">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Availability</label>
+                    <select id="edit-availability" class="border rounded w-full px-3 py-2">
+                        <option value="Available">Available</option>
+                        <option value="Unavailable">Unavailable</option>
+                    </select>
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" id="close-popup" class="px-4 py-2 bg-gray-300 rounded mr-2">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const carTable = document.getElementById('car-table');
+        const editPopup = document.getElementById('edit-popup');
+        const closePopup = document.getElementById('close-popup');
+        const editForm = document.getElementById('edit-form');
+        const editImageUrlInput = document.getElementById('edit-image-url');
+        const editAvailabilityInput = document.getElementById('edit-availability');
+
+        async function fetchCars() {
+            const response = await fetch('http://localhost:9090/cars');
+            const cars = await response.json();
+
+            carTable.innerHTML = cars.map(car => `
+                <tr>
+                    <td class="border px-4 py-2">#${car.id}</td>
+                    <td class="border px-4 py-2"><img src="${car.imagePath}" alt="${car.make}" class="w-16 h-16 rounded"></td>
+                    <td class="border px-4 py-2">${car.make}</td>
+                    <td class="border px-4 py-2">${car.model}</td>
+                    <td class="border px-4 py-2">
+                        <span class="px-2 py-1 rounded ${car.availabilityStatus === 'Available' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}">
+                            ${car.availabilityStatus}
+                        </span>
+                    </td>
+                    <td class="border px-4 py-2">${car.year}</td>
+                    <td class="border px-4 py-2">$${car.pricePerDay}</td>
+                    <td class="border px-4 py-2 flex items-center space-x-2">
+                        <button onclick="editCar(${car.id}, '${car.make}', '${car.model}', ${car.year}, ${car.pricePerDay}, '${car.imagePath.split('/').pop()}', '${car.availabilityStatus}')" class="text-blue-600">✏️</button>
+                        <button onclick="deleteCar(${car.id})" class="text-red-600">🗑️</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        async function deleteCar(id) {
+            await fetch(`http://localhost:9090/cars/${id}`, { method: 'DELETE' });
+            fetchCars();
+        }
+
+        function editCar(id, make, model, year, price, image, availability) {
+            document.getElementById('edit-make').value = make;
+            document.getElementById('edit-model').value = model;
+            document.getElementById('edit-year').value = year;
+            document.getElementById('edit-price').value = price;
+            editImageUrlInput.value = image;
+            editAvailabilityInput.value = availability;
+
+            editForm.onsubmit = async function (event) {
+                event.preventDefault();
+
+                const formData = new FormData();
+                formData.append('make', document.getElementById('edit-make').value);
+                formData.append('model', document.getElementById('edit-model').value);
+                formData.append('year', document.getElementById('edit-year').value);
+                formData.append('pricePerDay', document.getElementById('edit-price').value);
+                formData.append('availabilityStatus', document.getElementById('edit-availability').value);
+                formData.append('imagePath', editImageUrlInput.value);
+
+                await fetch(`http://localhost:9090/cars/${id}`, {
+                    method: 'PUT',
+                    body: formData
+                });
+
+                editPopup.classList.add('hidden');
+                fetchCars();
+            };
+
+            editPopup.classList.remove('hidden');
+        }
+
+        closePopup.addEventListener('click', () => editPopup.classList.add('hidden'));
+
+        fetchCars();
+    </script>
+    
+      <script>
+      function logout() {
+	    localStorage.removeItem("userId");
+	    localStorage.removeItem("token")
+	    window.location.href = "adminlogin.html";
+	  }
+  </script>
+  
+</body>
+</html>

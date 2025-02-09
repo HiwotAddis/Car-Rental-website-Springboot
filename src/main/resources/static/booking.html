@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All User Bookings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-padding-top: 2rem;
+      scroll-behavior: smooth;
+      list-style: none;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body class="overflow-x-hidden bg-gray-100 font-sans">
+
+<header class="bg-white shadow-sm">
+  <nav class="container mx-auto flex justify-between items-center py-4 px-6">
+    <img src="img/logo1.png" alt="Logo" class="h-14 w-46">
+    <div class="space-x-6">
+      <a href="addcar.html" class="text-gray-600 font-medium  hover:text-blue-600 ">Add Car</a>
+      <a href="manage.html" class="text-gray-500 font-medium hover:text-blue-600">Manage Car</a>
+      <a href="booking.html" class="text-blue-500 font-medium border-b-2 border-blue-600">Bookings</a>
+    </div>
+    <button onclick="logout()" class="text-red-500 font-medium hover:underline">Logout</button>
+  </nav>
+</header>
+
+  <main class="container min-h-screen mx-auto px-4 py-8">
+    <h2 class="text-2xl font-semibold text-gray-700 mb-6">Bookings Overview</h2>
+    <div id="booking-list" class="space-y-6">
+      <!-- Booking cards will be dynamically inserted here -->
+    </div>
+  </main>
+
+  <footer class="bg-blue-900 text-white py-4">
+    <div class="text-center">
+      <p class="text-sm">© 2025 CarRentals. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Function to fetch bookings from the server
+    async function fetchBookings() {
+      try {
+        const response = await fetch('http://localhost:9090/bookings/admin');
+        if (!response.ok) {
+          throw new Error('Failed to fetch bookings');
+        }
+
+        const bookings = await response.json();
+        renderBookings(bookings);
+      } catch (error) {
+        console.error('Error fetching bookings:', error);
+      }
+    }
+
+    // Function to render bookings dynamically
+    function renderBookings(bookings) {
+      const bookingList = document.getElementById('booking-list');
+      bookingList.innerHTML = ''; // Clear existing content
+
+      bookings.forEach(booking => {
+        if (booking.status === 'Confirmed') {
+          const bookingCard = document.createElement('div');
+          bookingCard.className = 'bg-white shadow-md rounded-lg p-6 flex flex-col md:flex-row justify-between items-center';
+
+          bookingCard.innerHTML = `
+            <div class="flex items-center space-x-4">
+              <img src="${booking.car.imagePath}" alt="Car Image" class="w-28 h-20 object-cover rounded-md">
+              <div>
+                <h3 class="text-lg font-semibold text-gray-800">${booking.car.make} ${booking.car.model}</h3>
+                <p class="text-gray-600">Year: ${booking.car.year}</p>
+                <p class="text-gray-600">Price: <span class="font-medium text-green-500">$${booking.car.pricePerDay}/day</span></p>
+                <p class="text-gray-600">Booked By: ${booking.user.name} (${booking.user.email})</p>
+              </div>
+            </div>
+
+            <div class="text-sm text-gray-700 mt-4 md:mt-0">
+              <p>Booking Dates:</p>
+              <p><span class="font-medium">Start:</span> ${booking.startDate}</p>
+              <p><span class="font-medium">End:</span> ${booking.endDate}</p>
+            </div>
+
+            <div class="flex flex-col items-center md:items-end">
+              <span class="inline-block bg-green-100 text-green-500 text-xs font-medium px-3 py-1 rounded-full mb-2">${booking.status}</span>
+              <button class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600" onclick="cancelBooking(${booking.id})">Cancel</button>
+            </div>
+          `;
+
+          bookingList.appendChild(bookingCard);
+        }
+      });
+    }
+
+    // Function to cancel a booking
+/*     async function cancelBooking(bookingId) {
+      try {
+        const response = await fetch(`http://localhost:9090/bookings/${bookingId}`, {
+          method: 'DELETE',
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to cancel booking');
+        }
+
+        alert('Booking canceled successfully');
+        fetchBookings(); // Refresh bookings
+      } catch (error) {
+        console.error('Error canceling booking:', error);
+      }
+    } */
+
+    // Fetch bookings on page load
+    fetchBookings();
+  </script>
+  
+    <script>
+  function logout() {
+	    localStorage.removeItem("userId");
+	    localStorage.removeItem("token");
+	    window.location.href = "adminlogin.html";
+	  }
+  </script>
+</body>
+</html>
